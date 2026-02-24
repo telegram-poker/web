@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* ============================================================
+   THEME TOKENS — Your single source of truth in Tailwind v4
+   In v4, all config lives here. No tailwind.config.js needed.
+
+   HOW TO CUSTOMIZE:
+   - Change a color here → updates every utility that uses it
+   - e.g. change --color-accent to purple → every button/tab/badge updates
+   ============================================================ */
+
+@theme {
+  /* ── Backgrounds ───────────────────────────────────────── */
+  --color-bg:       #0d0f14;
+  --color-surface:  #161b24;
+  --color-surface2: #1e2533;
+
+  /* ── Borders ───────────────────────────────────────────── */
+  --color-border:   #2a3347;
+
+  /* ── Accent (main brand color — change this one to rebrand) */
+  --color-accent:      #00e676;
+  --color-accent-dim:  #00b85c;
+  --color-accent-text: #0d0f14;
+
+  /* ── Gold (VIP / premium elements) ────────────────────── */
+  --color-gold:    #ffd54f;
+
+  /* ── Status ────────────────────────────────────────────── */
+  --color-danger:  #ff5252;
+  --color-warning: #ffb74d;
+
+  /* ── Text ──────────────────────────────────────────────── */
+  --color-white:   #e8eaf6;
+  --color-muted:   #7986a3;
+
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-display: "Bebas Neue", cursive;
+  --font-body:    "Rajdhani", sans-serif;
+  --font-mono:    "Share Tech Mono", monospace;
+
+  /* ── Shadows ───────────────────────────────────────────── */
+  --shadow-accent: 0 4px 24px rgba(0, 230, 118, 0.25);
+  --shadow-gold:   0 4px 24px rgba(255, 213, 79, 0.20);
+
+  /* ── Animations ────────────────────────────────────────── */
+  --animate-fade-up:   fadeUp 0.28s ease both;
+  --animate-pulse-dot: pulseDot 2s infinite;
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+}
+
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+
+@layer utilities {
+  .card-accent-bar { position: relative; overflow: hidden; }
+  .card-accent-bar::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--color-accent);
+    border-radius: 0 2px 2px 0;
+  }
+  .card-accent-bar-gold::before   { background: var(--color-gold);  }
+  .card-accent-bar-danger::before { background: var(--color-danger); }
+}
