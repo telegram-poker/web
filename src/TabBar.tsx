@@ -65,7 +65,7 @@ export function TabBar() {
             )}
 
             <span className="text-[10px] font-bold tracking-wide leading-none">
-              {tab.labelZh}
+              {tab.label}
             </span>
           </button>
         )

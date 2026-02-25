@@ -92,7 +92,11 @@ export function ClubScreen({ onToast }: { onToast: (msg: string) => void }) {
       <p className="px-5 pt-4 pb-2 text-xs font-bold text-(--color-muted) uppercase tracking-widest">我的俱乐部</p>
 
       <div className="flex-1 overflow-y-auto flex flex-col">
-        {myClubs.length === 0 ? <EmptyClubs /> : myClubs.map(c => <ClubItem key={c.id} club={c} />)}
+        {myClubs.length === 0 ? (
+          <EmptyClubs />
+        ) : (
+          myClubs.map((c: Club) => <ClubItem key={c.id} club={c} />)
+        )}
       </div>
     </div>
   )

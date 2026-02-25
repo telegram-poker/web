@@ -42,8 +42,9 @@ export function AKScreen({ onToast }: { onToast: (msg: string) => void }) {
       <div className="flex flex-col gap-2.5 px-4 py-2">
         {meta.features.map((f, i) => (
           <Card key={i} className="flex items-start gap-3 p-3">
-            <span className="text-xl leading-snug">{f.icon}</span>
-            <p className="text-sm text-(--color-white) font-medium leading-snug">{f.text}</p>
+            {/* use a simple checkmark icon since theme.features is just a string list */}
+            <span className="text-xl leading-snug">✔️</span>
+            <p className="text-sm text-(--color-white) font-medium leading-snug">{f}</p>
           </Card>
         ))}
       </div>
