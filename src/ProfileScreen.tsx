@@ -21,9 +21,11 @@ function ProfileRow({ icon, label, value, onClick }: { icon: string; label: stri
 }
 
 export function ProfileScreen({ onToast }: { onToast: (msg: string) => void }) {
-  const { user } = useTelegram()
+  const { user: tgUser } = useTelegram()
+  const storeUser = useAppStore(s => s.user)
   const { balance, stats } = useAppStore()
 
+  const user = tgUser || storeUser
   const displayName = user ? [user.first_name, user.last_name].filter(Boolean).join(' ') : 'Guest'
   const initials    = displayName[0]?.toUpperCase() ?? '?'
 

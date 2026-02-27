@@ -48,7 +48,13 @@ declare global {
   }
 }
 
+import { useEffect } from 'react'
+import { useAppStore } from '@/store/appStore'
+
 export function useTelegram() {
+  const setUser = useAppStore((s) => s.setUser)
+  const storeUser = useAppStore((s) => s.user)
+
   useEffect(() => {
     const tg = window.Telegram?.WebApp
     if (tg) {
@@ -63,6 +69,26 @@ export function useTelegram() {
 
   const webApp = window.Telegram?.WebApp
   const user = webApp?.initDataUnsafe?.user
+
+  // mirror into store so all components can access
+  useEffect(() => {
+    // only update when running inside Telegram
+    if (webApp) {
+      setUser(user)
+    }
+  }, [user, setUser, webApp])
+
+  // if not inside telegram and store has no user yet, seed dummy
+  useEffect(() => {
+    if (!webApp && !storeUser) {
+      setUser({
+        id: 0,
+        is_bot: false,
+        first_name: 'Guest',
+        last_name: undefined,
+      })
+    }
+  }, [webApp, storeUser, setUser])
 
   return {
     webApp,

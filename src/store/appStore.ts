@@ -4,6 +4,17 @@ import type { Room, Club, Stats } from '@/types'
 // tab identifiers used throughout the app
 type Tab = 'game' | 'club' | 'ak' | 'share' | 'profile'
 
+interface TelegramUser {
+  id: number
+  is_bot: boolean
+  first_name: string
+  last_name?: string
+  username?: string
+  language_code?: string
+  is_premium?: boolean
+  photo_url?: string
+}
+
 interface AppState {
   activeTab: Tab
   setTab: (tab: Tab) => void
@@ -27,6 +38,10 @@ interface AppState {
   referralCode: string
   referralCount: number
   referralEarned: number
+
+  // telegram user (login)
+  user?: TelegramUser
+  setUser: (user?: TelegramUser) => void
 }
 
 const INITIAL_ROOMS: Room[] = [
@@ -87,4 +102,7 @@ export const useAppStore = create<AppState>((set) => ({
   referralCode: '',
   referralCount: 0,
   referralEarned: 0,
+
+  user: undefined,
+  setUser: (user) => set({ user }),
 }))

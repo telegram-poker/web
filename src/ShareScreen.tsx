@@ -3,8 +3,9 @@ import { useAppStore } from '@/store/appStore'
 import { Button, Card } from '@/components/ui'
 
 export function ShareScreen({ onToast }: { onToast: (msg: string) => void }) {
-  const { user } = useTelegram()
-  const { referralCode, referralCount, referralEarned } = useAppStore()
+  const { user: tgUser } = useTelegram()
+  const { referralCode, referralCount, referralEarned, user: storeUser } = useAppStore()
+  const user = tgUser || storeUser
 
   const code = user
     ? `AK-${String(user.id).slice(-4).padStart(4, '0')}-${user.id}`

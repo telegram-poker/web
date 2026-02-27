@@ -6,7 +6,9 @@ import { Card, Button } from '@/components/ui'
 type AssetTab = 'personal' | 'data'
 
 export function ProfileScreen({ onToast }: { onToast: (msg: string) => void }) {
-  const { user } = useTelegram()
+  const { user: tgUser } = useTelegram()
+  const storeUser = useAppStore(s => s.user)
+  const user = tgUser || storeUser
   const [activeAssetTab, setActiveAssetTab] = useState<AssetTab>('personal')
 
   // Use Telegram data or dummy data

@@ -2,6 +2,8 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+> **Telegram login**: the app integrates with a Telegram WebApp account. Set `VITE_TELEGRAM_BOT_USERNAME` in `.env` so the login widget can render. When opened inside Telegram the user data is automatically injected via `window.Telegram.WebApp.initData`.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh

@@ -10,12 +10,15 @@ import { ClubScreen }     from '@/screens/ClubScreen'
 import { AKScreen }       from '@/screens/AKScreen'
 import { ShareScreen }    from '@/screens/ShareScreen'
 import { ProfileScreen }  from '@/screens/ProfileScreen'
+import { LoginScreen }    from '@/screens/LoginScreen'
 
 export default function App() {
-  useTelegram()
+  const { isAvailable } = useTelegram()
   const activeTab = useAppStore(s => s.activeTab)
   const { toasts, show: toast } = useToast()
   const [loading, setLoading] = useState(true)
+
+  const telegramUser = useAppStore((s) => s.user)
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1200)
@@ -38,6 +41,11 @@ export default function App() {
         </main>
       </div>
     )
+  }
+
+  // if inside Telegram and not logged in, show login
+  if (isAvailable && !telegramUser) {
+    return <LoginScreen />
   }
 
   return (
